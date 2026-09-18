@@ -3,55 +3,82 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary-dark) 100%);
 }
 
 .login-card {
-  background: white;
-  padding: 3rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  background: var(--color-bg-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
   text-align: center;
-  max-width: 400px;
-  color: #333;
+  width: 100%;
+  max-width: 420px;
 }
 
 .login-card h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  color: #667eea;
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-primary);
 }
 
 .login-card p {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 2rem;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
 }
 
 .google-btn {
   width: 100%;
-  padding: 1rem;
-  font-size: 1rem;
-  background: #4285f4;
-  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
 }
 
 .google-btn:hover:not(:disabled) {
-  background: #3367d6;
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.google-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .google-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .login-footer {
-  font-size: 0.85rem;
-  color: #999;
-  margin-top: 2rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin-top: var(--spacing-xl);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .login-container {
+    padding: var(--spacing-md);
+  }
+
+  .login-card {
+    padding: var(--spacing-lg);
+  }
+
+  .login-card h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .google-btn {
+    padding: var(--spacing-md) var(--spacing-md);
+  }
 }
