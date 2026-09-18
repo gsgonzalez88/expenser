@@ -5,29 +5,25 @@ export const Dashboard = () => {
   const { user, signOut } = useAuthContext()
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="flex justify-between items-center px-6 py-4">
-          <div>
-            <h1 className="text-2xl font-bold text-blue-600">💰 Expenser</h1>
-          </div>
-          <div className="flex items-center gap-6">
-            <span className="text-sm text-gray-600">Welcome, {user?.email}</span>
-            <Button
-              onClick={signOut}
-              variant="destructive"
-              size="sm"
-            >
-              Sign Out
+    <div className="min-h-screen flex flex-col bg-background">
+      <header className="bg-card border-b border-border">
+        <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-3 px-4 py-3 sm:px-6">
+          <h1 className="text-xl font-bold text-primary">Expenser</h1>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-muted-foreground truncate max-w-[180px] sm:max-w-none">
+              {user?.email}
+            </span>
+            <Button onClick={signOut} variant="outline" size="sm">
+              Sign out
             </Button>
           </div>
         </div>
       </header>
 
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-4 sm:p-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Your Groups</h2>
-          <p className="text-gray-600">Coming soon...</p>
+          <h2 className="text-2xl font-semibold mb-4">Your groups</h2>
+          <p className="text-muted-foreground">Coming soon...</p>
         </div>
       </main>
     </div>
