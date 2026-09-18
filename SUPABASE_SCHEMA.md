@@ -1,6 +1,6 @@
 # Supabase Schema Setup
 
-## Overview
+> **Note:** the SQL below is the initial schema (already applied). Later changes live in `supabase/migrations/` and must be run in order. `002_fix_user_ids_and_rls.sql` supersedes the RLS section and `SUPABASE_TRIGGERS.md`.
 
 This document contains the SQL schema for Expenser. Copy and paste this into your Supabase SQL editor.
 

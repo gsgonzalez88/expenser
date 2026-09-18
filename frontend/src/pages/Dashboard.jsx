@@ -1,31 +1,50 @@
-import { useAuthContext } from '../context/AuthContext'
-import { Button } from '../components/ui/button'
+import { Link } from 'react-router-dom'
+import { AppLayout } from '../components/AppLayout'
+import { CreateGroupDialog } from '../components/CreateGroupDialog'
+import { Card } from '../components/ui/card'
+import { useGroups } from '../hooks/useGroups'
 
 export const Dashboard = () => {
-  const { user, signOut } = useAuthContext()
+  const { groups, loading, error, createGroup } = useGroups()
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <header className="bg-card border-b border-border">
-        <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-3 px-4 py-3 sm:px-6">
-          <h1 className="text-xl font-bold text-primary">Expenser</h1>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-muted-foreground truncate max-w-[180px] sm:max-w-none">
-              {user?.email}
-            </span>
-            <Button onClick={signOut} variant="outline" size="sm">
-              Sign out
-            </Button>
-          </div>
-        </div>
-      </header>
+    <AppLayout>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-semibold">Your groups</h2>
+        <CreateGroupDialog onCreate={createGroup} />
+      </div>
 
-      <main className="flex-1 p-4 sm:p-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-semibold mb-4">Your groups</h2>
-          <p className="text-muted-foreground">Coming soon...</p>
+      {error && <p className="text-sm text-destructive mb-4">{error}</p>}
+
+      {loading ? (
+        <p className="text-muted-foreground">Loading...</p>
+      ) : groups.length === 0 ? (
+        <Card className="items-center text-center py-12 px-6">
+          <p className="font-medium">No groups yet</p>
+          <p className="text-sm text-muted-foreground">
+            Create one to start tracking shared expenses.
+          </p>
+        </Card>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {groups.map((g) => {
+            const count = g.group_members?.[0]?.count ?? 0
+            return (
+              <Link key={g.id} to={`/groups/${g.id}`}>
+                <Card className="px-5 h-full transition-shadow hover:shadow-md">
+                  <h3 className="text-lg font-semibold">{g.name}</h3>
+                  {g.description && (
+                    <p className="text-sm text-muted-foreground">{g.description}</p>
+                  )}
+                  <p className="text-xs text-muted-foreground mt-auto">
+                    {count} {count === 1 ? 'member' : 'members'}
+                  </p>
+                </Card>
+              </Link>
+            )
+          })}
         </div>
-      </main>
-    </div>
+      )}
+    </AppLayout>
   )
 }
