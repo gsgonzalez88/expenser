@@ -52,7 +52,24 @@ expenser-project/
    npm run dev
    ```
 
-3. **Backend Setup**
+3. **(Optional) Skip Google login while developing**
+
+   Create a test user in your Supabase project (Authentication > Users > Add
+   user, with a password), then in `frontend/.env.local` (gitignored):
+
+   ```
+   VITE_AUTH_BYPASS=true
+   VITE_DEV_USER_EMAIL=dev@example.com
+   VITE_DEV_USER_PASSWORD=your-local-test-password
+   ```
+
+   `npm run dev` then auto signs in with that account. It is a *real* Supabase
+   session, so RLS works and the app is fully usable, and a yellow banner stays
+   on screen the whole time. The bypass is additionally gated on
+   `import.meta.env.DEV`, so it is stripped from production builds and cannot be
+   turned on there by any env var.
+
+4. **Backend Setup**
    ```bash
    cd backend
    npm install
